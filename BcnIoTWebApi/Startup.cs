@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Services;
 
 namespace BcnIoTWebApi
 {
@@ -32,6 +33,8 @@ namespace BcnIoTWebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BcnIoTWebApi", Version = "v1" });
             });
+
+            services.AddScoped<ISensorS1Service, SensorS1Service>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
