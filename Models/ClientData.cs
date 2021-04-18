@@ -2,7 +2,7 @@
 
 namespace Models
 {
-    class ClientData : IGenericCosmosDbItem
+    public class ClientData : IGenericCosmosDbItem
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
