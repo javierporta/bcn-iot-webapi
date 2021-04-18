@@ -22,25 +22,28 @@ namespace BcnIoTWebApi.Controllers
 
         // GET: api/<TemperatureHumiditySensors>
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get(string clientId)
+        public async Task<ActionResult<IEnumerable<SensorS1Data>>> Get(string clientId)
         {
             if (string.IsNullOrEmpty(clientId))
             {
                 return Unauthorized("No clientId provided");
             }
-            return new string[] { "value1", "value2" };
+
+            var serviceResult = await _sensorS1Service.GetAll();
+
+            return serviceResult.ToList();
         }
 
         // GET api/<TemperatureHumiditySensors>/5
         [HttpGet("{id}")]
-        public ActionResult<SensorS1Data> Get(int id, string clientId)
+        public async Task<ActionResult<SensorS1Data>> Get(int id, string clientId)
         {
             if (string.IsNullOrEmpty(clientId))
             {
                 return Unauthorized("No clientId provided");
             }
 
-            var serviceResult = _sensorS1Service.GeS1CurrentValues();
+            var serviceResult = await _sensorS1Service.GetS1CurrentValues();
 
             return serviceResult;
         }

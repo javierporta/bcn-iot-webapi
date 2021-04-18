@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Models;
 
 namespace Services
 {
     public interface ISensorS1Service
     {
-        SensorS1Data GeS1CurrentValues();
+        Task<SensorS1Data> GetS1CurrentValues();
+        Task<IEnumerable<SensorS1Data>> GetAll();
     }
 }
