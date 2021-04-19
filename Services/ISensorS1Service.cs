@@ -10,5 +10,6 @@ namespace Services
     {
         Task<SensorS1Data> GetS1CurrentValues();
         Task<IEnumerable<SensorS1Data>> GetAll();
+        Task<IEnumerable<SensorS1Data>> GetAllByClient(string clientId);
     }
 }

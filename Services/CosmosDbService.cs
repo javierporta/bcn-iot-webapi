@@ -44,9 +44,26 @@ namespace Services
 
         }
 
+
+
         public async Task<IEnumerable<T>> GetItemsAsync(string queryString)
         {
             var query = _container.GetItemQueryIterator<T>(new QueryDefinition(queryString));
+            List<T> results = new List<T>();
+            while (query.HasMoreResults)
+            {
+                var response = await query.ReadNextAsync();
+
+                results.AddRange(response.ToList());
+            }
+
+            return results;
+        }
+
+        public async Task<IEnumerable<T>> GetItemsAsync(QueryDefinition queryDefinition)
+        {
+
+            var query = _container.GetItemQueryIterator<T>(queryDefinition);
             List<T> results = new List<T>();
             while (query.HasMoreResults)
             {

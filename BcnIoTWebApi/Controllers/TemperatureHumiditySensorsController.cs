@@ -29,7 +29,7 @@ namespace BcnIoTWebApi.Controllers
                 return Unauthorized("No clientId provided");
             }
 
-            var serviceResult = await _sensorS1Service.GetAll();
+            var serviceResult = await _sensorS1Service.GetAllByClient(clientId);
 
             return serviceResult.ToList();
         }
