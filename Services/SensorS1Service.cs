@@ -17,10 +17,12 @@ namespace Services
             _clientService = clientService;
 
         }
-        public async Task<SensorS1Data> GetS1CurrentValues()
+        public async Task<SensorS1Data> GetS1CurrentValues(string mac)
 
         {
-            var serviceResult = await _cosmosDbServiceSensorS1.GetItemsAsync("SELECT TOP 1 * FROM c order by c.timestamp DESC");
+            var queryDefinition = new QueryDefinition("SELECT TOP 1 * FROM c WHERE c.mac = @mac ORDER BY c.timestamp DESC")
+                   .WithParameter("@mac", mac); //Todo Add registered clients check
+            var serviceResult = await _cosmosDbServiceSensorS1.GetItemsAsync(queryDefinition);
             var lastRecord = serviceResult.FirstOrDefault();
             return lastRecord;
 
@@ -28,7 +30,7 @@ namespace Services
 
         public async Task<IEnumerable<SensorS1Data>> GetAll()
         {
-            return await _cosmosDbServiceSensorS1.GetItemsAsync("SELECT * FROM c");
+            return await _cosmosDbServiceSensorS1.GetItemsAsync("SELECT TOP 100 * FROM c ORDER BY c.timestamp DESC");
 
         }
 

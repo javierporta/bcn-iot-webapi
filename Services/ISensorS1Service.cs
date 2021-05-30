@@ -8,7 +8,7 @@ namespace Services
 {
     public interface ISensorS1Service
     {
-        Task<SensorS1Data> GetS1CurrentValues();
+        Task<SensorS1Data> GetS1CurrentValues(string mac);
         Task<IEnumerable<SensorS1Data>> GetAll();
         Task<IEnumerable<SensorS1Data>> GetAllByClient(string clientId);
     }
