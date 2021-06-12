@@ -10,5 +10,6 @@ namespace Services
     {
         Task<ClientData> GetClientById(string id);
         Task<IEnumerable<ClientData>> GetAll();
+        Task UpdateClient(string id, ClientDataToUpdate clientDataToUpdate);
     }
 }

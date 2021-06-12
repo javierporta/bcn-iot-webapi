@@ -50,8 +50,9 @@ namespace BcnIoTWebApi.Controllers
 
         // PUT api/<ClientsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async void Put(string id, [FromBody] ClientDataToUpdate value)
         {
+            await _clientService.UpdateClient(id, value);
         }
 
         // DELETE api/<ClientsController>/5
