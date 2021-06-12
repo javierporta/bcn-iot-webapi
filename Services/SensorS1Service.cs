@@ -43,7 +43,7 @@ namespace Services
             }
 
             var queryDefinition =
-                new QueryDefinition($"SELECT * FROM c WHERE ARRAY_CONTAINS(@registeredDevices, c.mac)")
+                new QueryDefinition($"SELECT TOP 100 * FROM c WHERE ARRAY_CONTAINS(@registeredDevices, c.mac) ORDER BY c.timestamp DESC")
                     .WithParameter("@registeredDevices", client.RegisteredDevices);
             return await _cosmosDbServiceSensorS1.GetItemsAsync(queryDefinition);
         }
