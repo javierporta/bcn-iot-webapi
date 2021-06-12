@@ -21,15 +21,21 @@ namespace Services
             return await _cosmosDbServiceClient.GetItemsAsync("SELECT * FROM c");
         }
 
-        public async Task UpdateClient(string id, ClientDataToUpdate clientDataToUpdate)
+        public async Task<bool> UpdateClient(string id, ClientDataToUpdate clientDataToUpdate)
         {
             var clientData = await GetClientById(id);
+
+            if (clientData is null)
+            {
+                return false;
+            }
 
             clientData.Name = clientDataToUpdate.Name;
             clientData.TemperatureHighThreshold = clientDataToUpdate.TemperatureHighThreshold;
             clientData.TemperatureLowThreshold = clientDataToUpdate.TemperatureLowThreshold;
 
             await _cosmosDbServiceClient.UpdateItemAsync(id, clientData);
+            return true;
         }
 
         public async Task<ClientData> GetClientById(string id)

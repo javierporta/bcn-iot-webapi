@@ -50,9 +50,15 @@ namespace BcnIoTWebApi.Controllers
 
         // PUT api/<ClientsController>/5
         [HttpPut("{id}")]
-        public async void Put(string id, [FromBody] ClientDataToUpdate value)
+        public async Task<IActionResult> Put(string id, [FromBody] ClientDataToUpdate value)
         {
-            await _clientService.UpdateClient(id, value);
+            var result = await _clientService.UpdateClient(id, value);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return NotFound();
         }
 
         // DELETE api/<ClientsController>/5
