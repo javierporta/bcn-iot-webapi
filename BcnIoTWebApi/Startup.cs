@@ -114,7 +114,7 @@ namespace BcnIoTWebApi
             }
             else
             {
-                await cosmosDbService.UpdateItemAsync(CreateBcnOfficeClient().Id, CreateBcnOfficeClient());
+                // await cosmosDbService.UpdateItemAsync(CreateBcnOfficeClient().Id, CreateBcnOfficeClient());
             }
 
             return cosmosDbService;
