@@ -1,4 +1,4 @@
-# bcn-iot-webapi
+# Barcelona IoT Web API
 WebApi written in C# (.Net 5) that get IoT telemetry data from a CosmosDB database and expose it on different endpoints. 
 
 # Requirements
